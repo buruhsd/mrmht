@@ -15,15 +15,22 @@ class MakeProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->text('merk');
-            $table->float('price1');
+            $table->text('merk')->nullable();
+            $table->float('price1')->nullable();
             $table->float('price2')->nullable();
             $table->float('price3')->nullable();
             $table->float('price4')->nullable();
             $table->float('price5')->nullable();
+            $table->float('price6')->nullable();
             $table->integer('category_id')->unsigned();
+            $table->string('image1')->nullable();
+            $table->string('image2')->nullable();
+            $table->string('image3')->nullable();
+            $table->string('image4')->nullable();
+            $table->string('image5')->nullable();
+            $table->string('image6')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');

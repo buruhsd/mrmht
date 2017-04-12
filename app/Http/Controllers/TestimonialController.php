@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Promo;
+use App\Testimonial;
 
-class PromoController extends Controller
+class TestimonialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,8 @@ class PromoController extends Controller
     public function index()
     {
         //
-        $promos = Promo::get();
-
-        return response()->json($promos);
+        $testi = Testimonial::get();
+        return response()->json($testi);
     }
 
     /**
@@ -39,23 +38,7 @@ class PromoController extends Controller
     public function store(Request $request)
     {
         //
-        // try{
-
-        //     $promos = new Promo;
-        //     $promos->name = $request->json()->get('name');
-        //     $promos->description = $request->json()->get('description');
-        //     $promos->image = $request->image;
-        //     $promos->save();
-
-        // return response()->json(array('status'=>'ok','id'=>$promos->id));
-        // } catch (\Illuminate\Database\QueryException $ex) {
-        //   return response()->json(array('status'=>'error','message'=>$ex->getMessage()),400);
-        // } catch (Exception $e){
-        //   return response()->json(array('status'=>'error','message'=>$e->getMessage()),500);
-
-        // }
-
-            $img_string = $request->json()->get('image');
+        $img_string = $request->json()->get('image');
             $img_name = $request->json()->get('file_name');
 
             //decode base64 string
@@ -80,12 +63,12 @@ class PromoController extends Controller
                 $pub_url = url($png_url);
                 file_put_contents($path, $image);
 
-                $promo = new Promo;
-                $promo->name = $request->json()->get('name');
-                $promo->description = $request->json()->get('description');
-                $promo->image = $pub_url;
-                $promo->save();
-                return response()->json(array('status' => 'ok','id'=>$promo->id,'url'=>$pub_url));
+                $testi = new Testimonial;
+                $testi->name = $request->json()->get('name');
+                $testi->testi = $request->json()->get('testi');
+                $testi->image = $pub_url;
+                $testi->save();
+                return response()->json(array('status' => 'ok','id'=>$testi->id,'url'=>$pub_url));
             }else{
                 return response()->json(array('status' => 'error','message'=>'not image '.$mime_type),400);
             }
@@ -141,7 +124,6 @@ class PromoController extends Controller
             }else{
                 return response()->json(array('status' => 'error','message'=>'file is empty.'),400);
             }
-          
             $name = uniqid();
             if ($type == 'image'){
                 $png_url = 'images/'.$name.'.'.$extension;
@@ -149,12 +131,12 @@ class PromoController extends Controller
                 $pub_url = url($png_url);
                 file_put_contents($path, $image);
 
-                $promo = Promo::find($id);
-                $promo->name = $request->json()->get('name');
-                $promo->name = $request->json()->get('description');
-                $promo->image = $pub_url;
-                $promo->save();
-                return response()->json(array('status' => 'ok','id'=>$promo->id,'url'=>$pub_url));
+                $testi = Testimonial::find($id);
+                $testi->name = $request->json()->get('name');
+                $testi->testi = $request->json()->get('testi');
+                $testi->image = $pub_url;
+                $testi->save();
+                return response()->json(array('status' => 'ok','id'=>$testi->id,'url'=>$pub_url));
             }else{
                 return response()->json(array('status' => 'error','message'=>'not image '.$mime_type),400);
             }
@@ -170,8 +152,8 @@ class PromoController extends Controller
     {
         //
         try {
-          $promos = Promo::find($id);
-          $promos->delete();
+          $testi = Testimonial::find($id);
+          $testi->delete();
           return response()->json(array('status'=>'ok','message'=>'Item deleted'));
 
         }
