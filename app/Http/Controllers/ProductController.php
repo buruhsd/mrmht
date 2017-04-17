@@ -176,6 +176,8 @@ class ProductController extends Controller
                 $products->name = $request->json()->get('name');
                 $products->description = $request->json()->get('description');
                 $products->merk = $request->json()->get('merk');
+                $products->size = $request->json()->get('size');
+            	$products->stock = $request->json()->get('stock');
                 $products->price1 = $request->json()->get('price1');
                 $products->price2 = $request->json()->get('price2');
                 $products->price3 = $request->json()->get('price3');
@@ -258,6 +260,8 @@ class ProductController extends Controller
             $products->name = $request->json()->get('name');
             $products->description = $request->json()->get('description');
             $products->merk = $request->json()->get('merk');
+            $products->size = $request->json()->get('size');
+            $products->stock = $request->json()->get('stock');
             $products->price1 = $request->json()->get('price1');
             $products->price2 = $request->json()->get('price2');
             $products->price3 = $request->json()->get('price3');

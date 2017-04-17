@@ -46,7 +46,7 @@ class TransactionController extends Controller
         $transaction->product_name = $request->json()->get('product_name');
         $transaction->total_product = $request->json()->get('total_product');
         $transaction->total_price = $request->json()->get('total_price');
-        $categories->save();
+        $transaction->save();
 
         return response()->json(array('status'=>'ok','id'=>$transaction->id));
         } catch (\Illuminate\Database\QueryException $ex) {
@@ -66,6 +66,13 @@ class TransactionController extends Controller
     public function show($id)
     {
         //
+        try {
+
+            $transaction = Transaction::find($id);
+            return response()->json($transaction);
+        } catch (Exception $e) {
+            return response()->json(array('status' => 'error','message' => $e->getMessage() ));
+        }
     }
 
     /**
@@ -97,7 +104,7 @@ class TransactionController extends Controller
         $transaction->product_name = $request->json()->get('product_name');
         $transaction->total_product = $request->json()->get('total_product');
         $transaction->total_price = $request->json()->get('total_price');
-        $categories->save();
+        $transaction->save();
 
         return response()->json(array('status'=>'ok','id'=>$transaction->id));
         } catch (\Illuminate\Database\QueryException $ex) {

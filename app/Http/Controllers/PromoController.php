@@ -100,6 +100,13 @@ class PromoController extends Controller
     public function show($id)
     {
         //
+         try {
+
+            $promo = Promo::find($id);
+            return response()->json($promo);
+        } catch (Exception $e) {
+            return response()->json(array('status' => 'error','message' => $e->getMessage() ));
+        }
     }
 
     /**

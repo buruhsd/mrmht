@@ -83,6 +83,13 @@ class TestimonialController extends Controller
     public function show($id)
     {
         //
+         try {
+
+            $testi = Testimonial::find($id);
+            return response()->json($testi);
+        } catch (Exception $e) {
+            return response()->json(array('status' => 'error','message' => $e->getMessage() ));
+        }
     }
 
     /**

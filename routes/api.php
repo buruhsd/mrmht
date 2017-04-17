@@ -20,3 +20,5 @@ Route::get('/user', function (Request $request) {
 Route::resource('/product', 'ProductController');
 Route::resource('/category', 'CategoryController');
 Route::resource('/promo', 'PromoController');
+Route::resource('/testimonial','TestimonialController');
+Route::resource('/transaction','TransactionController');
