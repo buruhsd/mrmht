@@ -84,6 +84,7 @@ class CategoryController extends Controller
                 $categories->name = $request->json()->get('name');
                 $categories->description = $request->json()->get('description');
                 $categories->image = $pub_url;
+                $categories->parent_id = $request->json()->get('parent_id');
                 $categories->save();
                 return response()->json(array('status' => 'ok','id'=>$categories->id,'url'=>$pub_url));
             }else{
@@ -138,6 +139,7 @@ class CategoryController extends Controller
 
         $categories->name = $request->json()->get('name');
         $categories->description = $request->json()->get('description');
+        $categories->parent_id = $request->json()->get('parent_id');
         $categories->save();
 
         return response()->json(array('status'=>'ok','id'=>$categories->id));
