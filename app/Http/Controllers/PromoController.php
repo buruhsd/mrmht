@@ -158,7 +158,7 @@ class PromoController extends Controller
 
                 $promo = Promo::find($id);
                 $promo->name = $request->json()->get('name');
-                $promo->name = $request->json()->get('description');
+                $promo->description = $request->json()->get('description');
                 $promo->image = $pub_url;
                 $promo->save();
                 return response()->json(array('status' => 'ok','id'=>$promo->id,'url'=>$pub_url));
