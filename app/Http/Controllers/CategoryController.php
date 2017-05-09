@@ -15,7 +15,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $category = Category::Orderby('id','DESC')->get();
+        $category = Category::Orderby('id','DESC')
+            ->where('parent_id', 0)->get();
         return response()->json($category);
     }
 
