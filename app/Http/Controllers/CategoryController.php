@@ -30,6 +30,12 @@ class CategoryController extends Controller
         //
     }
 
+    public function sub()
+    {
+        $categories = Category::where('parent_id', '<>', 0)->get();
+        return response()->json($categories);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -185,4 +191,6 @@ class CategoryController extends Controller
             return response()->json(array('status' => 'error','message' => $e->getMessage() ));
         }
     }
+
+
 }

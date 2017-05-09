@@ -23,3 +23,4 @@ Route::resource('/promo', 'PromoController');
 Route::resource('/testimonial','TestimonialController');
 Route::resource('/transaction','TransactionController');
 Route::get('/category/{id}/all', 'CategoryController@subcategory');
+Route::get('/sub', 'CategoryController@sub');
