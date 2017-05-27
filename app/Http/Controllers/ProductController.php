@@ -37,29 +37,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // var_dump($request->isjson()); die();
-        // try {
-
-        // $products = new Product;
-
-        // $products->name = $request->json()->get('name');
-        // $products->description = $request->json()->get('description');
-        // $products->merk = $request->json()->get('merk');
-        // $products->price1 = $request->json()->get('price1');
-        // $products->price2 = $request->json()->get('price2');
-        // $products->price3 = $request->json()->get('price3');
-        // $products->price4 = $request->json()->get('price4');
-        // $products->category_id = $request->json()->get('category_id');
-        // $products->save();
-
-        // return response()->json(array('status'=>'ok','id'=>$products->id));
-        // } catch (\Illuminate\Database\QueryException $ex) {
-        //   return response()->json(array('status'=>'error','message'=>$ex->getMessage()),400);
-        // } catch (Exception $e){
-        //   return response()->json(array('status'=>'error','message'=>$e->getMessage()),500);
-
-        // }
+        
             $img_string = $request->json()->get('image1');
             $img_name = $request->json()->get('file_name');
 

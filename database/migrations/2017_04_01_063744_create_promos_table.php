@@ -18,6 +18,9 @@ class CreatePromosTable extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->text('image')->nullable();
+            $table->String('stock')->nullable();
+            $table->String('harga')->nullable();
+            $table->String('bataswaktu')->nullable();
             $table->timestamps();
         });
     }

@@ -84,6 +84,9 @@ class PromoController extends Controller
                 $promo->name = $request->json()->get('name');
                 $promo->description = $request->json()->get('description');
                 $promo->image = $pub_url;
+                $promo->stock = $request->json()->get('stock');
+                $promo->harga = $request->json()->get('harga');
+                $promo->bataswaktu = $request->json()->get('bataswaktu');
                 $promo->save();
                 return response()->json(array('status' => 'ok','id'=>$promo->id,'url'=>$pub_url));
             }else{
@@ -160,6 +163,9 @@ class PromoController extends Controller
                 $promo->name = $request->json()->get('name');
                 $promo->description = $request->json()->get('description');
                 $promo->image = $pub_url;
+                $promo->stock = $request->json()->get('stock');
+                $promo->harga = $request->json()->get('harga');
+                $promo->bataswaktu = $request->json()->get('bataswaktu');
                 $promo->save();
                 return response()->json(array('status' => 'ok','id'=>$promo->id,'url'=>$pub_url));
             }else{
