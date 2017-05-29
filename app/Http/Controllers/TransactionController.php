@@ -15,7 +15,7 @@ class TransactionController extends Controller
     public function index()
     {
         //
-        $transaction = Transaction::get();
+        $transaction = Transaction::Orderby('id','DESC')->get();
         return response()->json($transaction);
     }
 

@@ -15,7 +15,7 @@ class PromoController extends Controller
     public function index()
     {
         //
-        $promos = Promo::get();
+        $promos = Promo::Orderby('id','DESC')->get();
 
         return response()->json($promos);
     }

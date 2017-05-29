@@ -24,3 +24,4 @@ Route::resource('/testimonial','TestimonialController');
 Route::resource('/transaction','TransactionController');
 Route::get('/category/{id}/all', 'CategoryController@subcategory');
 Route::get('/sub', 'CategoryController@sub');
+Route::get('/category/product/{id}','CategoryController@product');

@@ -15,7 +15,7 @@ class TestimonialController extends Controller
     public function index()
     {
         //
-        $testi = Testimonial::get();
+        $testi = Testimonial::Orderby('id','DESC')->get();
         return response()->json($testi);
     }
 
@@ -40,7 +40,7 @@ class TestimonialController extends Controller
         //
             $img_string = $request->json()->get('image');
             $img_name = $request->json()->get('file_name');
-            $img_string2 = $request->json()->get('image');
+            $img_string2 = $request->json()->get('image2');
             $img_name2 = $request->json()->get('file_name');
 
             //decode base64 string
@@ -141,7 +141,7 @@ class TestimonialController extends Controller
         //
         $img_string = $request->json()->get('image');
             $img_name = $request->json()->get('file_name');
-            $img_string2 = $request->json()->get('image');
+            $img_string2 = $request->json()->get('image2');
             $img_name2 = $request->json()->get('file_name');
 
             //decode base64 string
