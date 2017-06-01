@@ -131,4 +131,24 @@ class UserController extends Controller
 
         return response()->json(array('status'=>'ok','message'=>'Item deleted'));
     }
+
+    public function cekuser(Request $request){
+        $email = $request->json()->get('email');
+        $password = $request->json()->get('password');
+
+        $hash = bcrypt($password);
+        $data = User::where('email', $email)->first();
+
+        if ($hash == $data->password) {
+            # code...
+            if ($data->level == 0) {
+                    # code...
+                return response()->json(array('status'=>'ok','level'=>'admin'));
+
+            }
+            return response()->json(array('status'=>'ok','level'=>'pegawai'));
+        }
+
+        return response()->json(array('status'=>'user tidak terdaftar','level'=>'pegawai'));
+    }
 }
