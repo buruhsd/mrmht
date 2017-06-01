@@ -220,23 +220,23 @@ class ProductController extends Controller
                 $products->price5 = $request->json()->get('price5');
                 $products->price6 = $request->json()->get('price6');
                 $products->image1 = $pub_url;
-                if ($image2) {
+                if ($img_string2) {
                     $products->image2 = $pub_url2;
                 }
 
-                if ($image3) {
+                if ($img_string3) {
                     $products->image3 = $pub_url3;
                 }
                 
-                if ($image4) {
+                if ($img_string4) {
                     $products->image4 = $pub_url4;
                 }
                 
-                if ($image5) {
+                if ($img_string5) {
                     $products->image5 = $pub_url5;
                 }
 
-                if ($image6) {
+                if ($img_string6) {
                     $products->image6 = $pub_url6;
                 }
                 
