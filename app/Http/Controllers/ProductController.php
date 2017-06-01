@@ -206,6 +206,8 @@ class ProductController extends Controller
                 $products->image4 = $pub_url4;
                 $products->image5 = $pub_url5;
                 $products->image6 = $pub_url6;
+                $products->size = $request->json()->get('size');
+                $products->stock = $request->json()->get('stock');
                 $products->category_id = $request->json()->get('category_id');
                 $products->save();
                 return response()->json(array('status' => 'ok','id'=>$products->id,'url'=>$pub_url));
@@ -390,6 +392,8 @@ class ProductController extends Controller
                 $products->image4 = $pub_url4;
                 $products->image5 = $pub_url5;
                 $products->image6 = $pub_url6;
+                $products->size = $request->json()->get('size');
+                $products->stock = $request->json()->get('stock');
                 $products->category_id = $request->json()->get('category_id');
                 $products->save();
                 return response()->json(array('status' => 'ok','id'=>$products->id,'url'=>$pub_url));

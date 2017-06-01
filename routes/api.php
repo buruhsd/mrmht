@@ -22,6 +22,7 @@ Route::resource('/category', 'CategoryController');
 Route::resource('/promo', 'PromoController');
 Route::resource('/testimonial','TestimonialController');
 Route::resource('/transaction','TransactionController');
+Route::resource('/admin', 'UserController');
 Route::get('/category/{id}/all', 'CategoryController@subcategory');
 Route::get('/sub', 'CategoryController@sub');
 Route::get('/category/product/{id}','CategoryController@product');
