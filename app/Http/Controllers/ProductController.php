@@ -163,30 +163,49 @@ class ProductController extends Controller
                 $pub_url = url($png_url);
                 file_put_contents($path, $image);
 
-                $png_url2 = 'images/'.$name2.'.'.$extension;
-                $path = public_path($png_url2);
-                $pub_url2 = url($png_url2);
-                file_put_contents($path, $image2);
+                if ($image2) {
+                    $png_url2 = 'images/'.$name2.'.'.$extension;
+                    $path = public_path($png_url2);
+                    $pub_url2 = url($png_url2);
+                    file_put_contents($path, $image2);
+                }
+                
 
-                $png_url3 = 'images/'.$name3.'.'.$extension;
-                $path = public_path($png_url3);
-                $pub_url3 = url($png_url3);
-                file_put_contents($path, $image3);
+                if ($image3) {
+                    # code...
+                    $png_url3 = 'images/'.$name3.'.'.$extension;
+                    $path = public_path($png_url3);
+                    $pub_url3 = url($png_url3);
+                    file_put_contents($path, $image3);
+                }
 
-                $png_url4 = 'images/'.$name4.'.'.$extension;
-                $path = public_path($png_url4);
-                $pub_url4 = url($png_url4);
-                file_put_contents($path, $image4);
+                if ($image4) {
+                    # code...
+                    $png_url4 = 'images/'.$name4.'.'.$extension;
+                    $path = public_path($png_url4);
+                    $pub_url4 = url($png_url4);
+                    file_put_contents($path, $image4);
+                }
 
-                $png_url5 = 'images/'.$name5.'.'.$extension;
-                $path = public_path($png_url5);
-                $pub_url5 = url($png_url5);
-                file_put_contents($path, $image5);
+                if ($img_name5) {
+                    # code...
+                    $png_url5 = 'images/'.$name5.'.'.$extension;
+                    $path = public_path($png_url5);
+                    $pub_url5 = url($png_url5);
+                    file_put_contents($path, $image5);
 
-                $png_url6 = 'images/'.$name6.'.'.$extension;
-                $path = public_path($png_url6);
-                $pub_url6 = url($png_url6);
-                file_put_contents($path, $image6);
+                }
+
+                if ($image6) {
+                    # code...
+                    $png_url6 = 'images/'.$name6.'.'.$extension;
+                    $path = public_path($png_url6);
+                    $pub_url6 = url($png_url6);
+                    file_put_contents($path, $image6);
+                }
+
+                
+                
 
                 $products = new product;
                 $products->name = $request->json()->get('name');
@@ -201,11 +220,27 @@ class ProductController extends Controller
                 $products->price5 = $request->json()->get('price5');
                 $products->price6 = $request->json()->get('price6');
                 $products->image1 = $pub_url;
-                $products->image2 = $pub_url2;
-                $products->image3 = $pub_url3;
-                $products->image4 = $pub_url4;
-                $products->image5 = $pub_url5;
-                $products->image6 = $pub_url6;
+                if ($image2) {
+                    $products->image2 = $pub_url2;
+                }
+
+                if ($image3) {
+                    $products->image3 = $pub_url3;
+                }
+                
+                if ($image4) {
+                    $products->image4 = $pub_url4;
+                }
+                
+                if ($image5) {
+                    $products->image5 = $pub_url5;
+                }
+
+                if ($image6) {
+                    $products->image6 = $pub_url6;
+                }
+                
+                
                 $products->size = $request->json()->get('size');
                 $products->stock = $request->json()->get('stock');
                 $products->category_id = $request->json()->get('category_id');
