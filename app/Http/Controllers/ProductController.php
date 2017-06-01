@@ -163,7 +163,7 @@ class ProductController extends Controller
                 $pub_url = url($png_url);
                 file_put_contents($path, $image);
 
-                if ($image2) {
+                if ($img_string2) {
                     $png_url2 = 'images/'.$name2.'.'.$extension;
                     $path = public_path($png_url2);
                     $pub_url2 = url($png_url2);
@@ -171,7 +171,7 @@ class ProductController extends Controller
                 }
                 
 
-                if ($image3) {
+                if ($img_string3) {
                     # code...
                     $png_url3 = 'images/'.$name3.'.'.$extension;
                     $path = public_path($png_url3);
@@ -179,7 +179,7 @@ class ProductController extends Controller
                     file_put_contents($path, $image3);
                 }
 
-                if ($image4) {
+                if ($img_string4) {
                     # code...
                     $png_url4 = 'images/'.$name4.'.'.$extension;
                     $path = public_path($png_url4);
@@ -187,7 +187,7 @@ class ProductController extends Controller
                     file_put_contents($path, $image4);
                 }
 
-                if ($img_name5) {
+                if ($img_string5) {
                     # code...
                     $png_url5 = 'images/'.$name5.'.'.$extension;
                     $path = public_path($png_url5);
@@ -196,7 +196,7 @@ class ProductController extends Controller
 
                 }
 
-                if ($image6) {
+                if ($img_string6) {
                     # code...
                     $png_url6 = 'images/'.$name6.'.'.$extension;
                     $path = public_path($png_url6);
