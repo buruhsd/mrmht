@@ -44,24 +44,53 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $img_string = $request->json()->get('image');
+            $img_name = $request->json()->get('file_name');
 
-        try {
+            //decode base64 string
+            $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img_string));
 
-        $categories = new Category;
+            $f = finfo_open();
 
-        $categories->name = $request->json()->get('name');
-        $categories->description = $request->json()->get('description');
-        $categories->parent_id = $request->json()->get('parent_id');
-        $categories->save();
+            $mime_type = finfo_buffer($f, $image, FILEINFO_MIME_TYPE);
 
-        return response()->json(array('status'=>'ok','id'=>$categories->id));
-        } catch (\Illuminate\Database\QueryException $ex) {
-          return response()->json(array('status'=>'error','message'=>$ex->getMessage()),400);
-        } catch (Exception $e){
-          return response()->json(array('status'=>'error','message'=>$e->getMessage()),500);
+            if($mime_type != null || $mime_type != ''){
+                $mime_type_array = explode('/', $mime_type);
 
-        }
+                $type = $mime_type_array[0];
+                $extension = $mime_type_array[1];
+            }else{
+                return response()->json(array('status' => 'error','message'=>'file is empty.'),400);
+            }
+            $name = uniqid();
+
+            if ($img_string) {
+               if ($type == 'image'){
+                    $png_url = 'images/'.$name.'.'.$extension;
+                    $path = public_path($png_url);
+                    $pub_url = url($png_url);
+                    file_put_contents($path, $image);
+
+                    $categories = new Category;
+
+                    $categories->name = $request->json()->get('name');
+                    $categories->description = $request->json()->get('description');
+                    $categories->image = $pub_url;
+                    $categories->parent_id = $request->json()->get('parent_id');
+                    $categories->save();
+                    return response()->json(array('status' => 'ok','id'=>$categories->id,'url'=>$pub_url));
+                }else{
+                    return response()->json(array('status' => 'error','message'=>'not image '.$mime_type),400);
+                }
+            }else{
+                $categories = new Category;
+
+                $categories->name = $request->json()->get('name');
+                $categories->description = $request->json()->get('description');
+                $categories->parent_id = $request->json()->get('parent_id');
+                $categories->save();
+                return response()->json(array('status' => 'ok','id'=>$categories->id));
+            }
     }
 
     /**
@@ -105,22 +134,54 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
-        try {
+      $img_string = $request->json()->get('image');
+            $img_name = $request->json()->get('file_name');
 
-        $categories = Category::find($id);
+            //decode base64 string
+            $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img_string));
 
-        $categories->name = $request->json()->get('name');
-        $categories->description = $request->json()->get('description');
-        $categories->parent_id = $request->json()->get('parent_id');
-        $categories->save();
+            $f = finfo_open();
 
-        return response()->json(array('status'=>'ok','id'=>$categories->id));
-        } catch (\Illuminate\Database\QueryException $ex) {
-          return response()->json(array('status'=>'error','message'=>$ex->getMessage()),400);
-        } catch (Exception $e){
-          return response()->json(array('status'=>'error','message'=>$e->getMessage()),500);
+            $mime_type = finfo_buffer($f, $image, FILEINFO_MIME_TYPE);
 
-        }
+            if($mime_type != null || $mime_type != ''){
+                $mime_type_array = explode('/', $mime_type);
+
+                $type = $mime_type_array[0];
+                $extension = $mime_type_array[1];
+            }else{
+                return response()->json(array('status' => 'error','message'=>'file is empty.'),400);
+            }
+            $name = uniqid();
+
+            if ($img_string) {
+               if ($type == 'image'){
+                    $png_url = 'images/'.$name.'.'.$extension;
+                    $path = public_path($png_url);
+                    $pub_url = url($png_url);
+                    file_put_contents($path, $image);
+
+                    $categories = Category::find($id);
+
+                    $categories->name = $request->json()->get('name');
+                    $categories->description = $request->json()->get('description');
+                    $categories->image = $pub_url;
+                    $categories->parent_id = $request->json()->get('parent_id');
+                    $categories->save();
+                    return response()->json(array('status' => 'ok','id'=>$categories->id,'url'=>$pub_url));
+                }else{
+                    return response()->json(array('status' => 'error','message'=>'not image '.$mime_type),400);
+                }
+            }else{
+                $categories = Category::find($id);
+
+                $categories->name = $request->json()->get('name');
+                $categories->description = $request->json()->get('description');
+                $categories->parent_id = $request->json()->get('parent_id');
+                $categories->save();
+                return response()->json(array('status' => 'ok','id'=>$categories->id));
+            }
+            
     }
 
     /**
