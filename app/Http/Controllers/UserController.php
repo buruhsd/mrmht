@@ -16,7 +16,6 @@ class UserController extends Controller
     {
         //
         $user = User::Orderby('id','DESC')->get();
-
         return response()->json($user);
 
     }
@@ -45,11 +44,14 @@ class UserController extends Controller
         try{
 
         $password = $request->json()->get('password');
-        $hash = bcrypt($password);
+        // $hash = bcrypt($password);
+        $hash = md5($password);
+        
         $user = new User;
 
         $user->name = $request->json()->get('name');
         $user->email = $request->json()->get('email');
+        $user->level = $request->json()->get('level');
         $user->password = $hash;
 
         $user->save();
@@ -59,7 +61,6 @@ class UserController extends Controller
           return response()->json(array('status'=>'error','message'=>$ex->getMessage()),400);
         } catch (Exception $e){
           return response()->json(array('status'=>'error','message'=>$e->getMessage()),500);
-
         }
     }
 
@@ -72,6 +73,12 @@ class UserController extends Controller
     public function show($id)
     {
         //
+        try {
+            $user = User::find($id);
+            return response()->json($user);
+        } catch (Exception $e) {
+            return response()->json(array('status' => 'error','message' => $e->getMessage() ));
+        }
     }
 
     /**
@@ -96,20 +103,18 @@ class UserController extends Controller
     {
         //
         try{
-
         $password = $request->json()->get('password');
-        $hash = bcrypt($password);
-        $user = User::find('id');
+        $hash = md5($password);
 
+        $user = User::find($id);
         $user->name = $request->json()->get('name');
         $user->email = $request->json()->get('email');
         $user->password = $hash;
-
         $user->save();
 
         return response()->json(array('status'=>'ok','id'=>$user->id));
         } catch (\Illuminate\Database\QueryException $ex) {
-          return response()->json(array('status'=>'error','message'=>$ex->getMessage()),400);
+          return response()->json(array('status'=>'error','message'=>"Email Sudah ada"),400);
         } catch (Exception $e){
           return response()->json(array('status'=>'error','message'=>$e->getMessage()),500);
 
@@ -125,10 +130,47 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        $user = User::find('id');
+        $user = User::find($id);
 
         $user->delete();
 
         return response()->json(array('status'=>'ok','message'=>'Item deleted'));
+    }
+
+    public function cekuser(Request $request){
+        $email = $request->json()->get('email');
+        $password = $request->json()->get('password');
+
+        $hash = md5($password);
+        $where = array('email'=> $email, 'password'=>$hash );
+        $data = User::where($where)->first();
+
+        if (!is_null($data)) {
+            # code...
+            if ($data->level == 1) {
+                    # code...
+                return response()->json(
+                    array(
+                        'id'=>$data->id,
+                        'name'=>$data->name,
+                        'email'=>$data->email,
+                        'password'=>$password,
+                        'status'=>'ok',
+                        'level'=>'admin'));
+            }else{
+                return response()->json(
+                    array(
+                        'id'=>$data->id,
+                        'name'=>$data->name,
+                        'email'=>$data->email,
+                        'password'=>$password,
+                        'status'=>'ok',
+                        'level'=>'pegawai'));    
+            }
+            
+        }else{
+            return response()->json(array('status'=>'user tidak terdaftar'));
+        }
+
     }
 }

@@ -26,3 +26,4 @@ Route::resource('/admin', 'UserController');
 Route::get('/category/{id}/all', 'CategoryController@subcategory');
 Route::get('/sub', 'CategoryController@sub');
 Route::get('/category/product/{id}','CategoryController@product');
+Route::post('/cekuser', 'UserController@cekuser');
